@@ -1,0 +1,819 @@
+Please note that in the "Fixed bugs" sections, the bugs are not just related to the previous version, most of the time they also affect other old releases.
+
+
+<h1>April 3, 2012<br>
+v. 4.4<br></h1><hr size="1">
+
+<b>New features and feature changes</b><br/><br/>
+
+DaDaBIK can now officially handle and create front-end for views, in addition to front-end for normal tables. This can help in creating more flexible database applications.<br><br>
+
+It is now possible to avoid the display of the NULL column in the insert/edit form. A parameter $null_checkbox is now available in config.php. Note that, if the record you are editing contains a NULL value for one or more fields, the NULL checkboxes are displayed anyway, even if $null_checkbox is set to 0.<br><br>
+
+The DaDaBIK end-user interface is now available in Russian.<br><br>
+
+Oracle and MS SQL Server are not officially supported anymore.<br><br>
+
+German, Dutch and French translations are now complete.<br><br>
+
+
+
+<b>Fixed bugs</b><br><br>
+
+Some special characters were not correctly escaped in some situations, this chould lead to errors and/or insert/update of wrong data in the database.<br><br>
+
+DaDaBIK, with SQLite, didn't produce error messages if an SQL query failed. For example, an insert query which violated a constrain, was reported as "Record correctly inserted." even if the record was not inserted. Fixed.<br/><br/>
+
+DaDaBIK produced a "Fatal error: Cannot re-assign auto-global variable _POST" if used together with PHP 4.4. Fixed.<br/><br/>
+
+DaDaBIK produced an error during installation with PostgreSQL >= 9.1. Fixed. <br/><br/>
+
+If all the fields of an edit form were required but one or more fields were NULL in the database, the corresponding NULL checkbox were displayed but the column label "NULL" were not. Fixed, the column label is now displayed.<br><br>
+
+A bug prevented to work correctly with date type field and SQLite. Fixed. Thanks to Triton for having reported it (<a href="http://www.dadabik.org/forum/read.php?1,14771">http://www.dadabik.org/forum/read.php?1,14771</a>).<br/><br/>
+
+If, for a date field, the value of the month was set to other than [1-12] OR the value of the day was set to other than [1-31] OR the value of the year was set to other than [$start_year-$end_year] DaDaBIK will displayed in the edit view, for the relative field, the first default value available in the listbox. For example if a date field was set 1940-00-00 in the database, DaDaBIK will display, in its default configuration, 1968-01-01 and updated the date to 1968-01-01 if the record is saved. Fixed. Now DaDaBIK produce an error message if a date value is not representable with the day-month-year listboxes.<br><br>
+
+If, for a select_single field, the user selected "other" and didn't specify a custom value during insert/update, the value "......" was inserted. Fixed, now a "required field" error message is displayed. <br><br>
+
+If, after a insert/update operation, the form was displayed again to the user because of an error (e.g. a required field was not filled) and the value of a date field was set to NULL, some undefined variable messages were displayed. Fixed.<br><br>
+
+If, for a select_single field, the user selected "other" and specify a custom value during insert, that new value was not included as additional option. Fixed.<br><br>
+
+<b>Other changes</b><br/><br/>
+
+A new section, "Unexpected behaviors" has been added to the documentation. It's a list of behaviors which the average user doesn't expect from DaDaBIK but that probably can't be considered real bugs. An important point discussed here is about the value actually inserted in the database during an insert/update, if the value typed in the form is not part of the domain specified during table creation.<br><br>
+
+The "Known bugs and limitations" section of the documentation has been updated, highlighting two bugs, one related to search operations and the other related to some characters which, for some languages, are incorrectly displayed.
+
+
+<br/>
+
+<h1>February 14, 2012<br>
+v. 4.4 beta<br></h1><hr size="1">
+
+<b>Fixed bugs</b><br><br>
+
+The authentication didn't work correctly and prevent users to log-in if the DBMS chosen was SQLite. FIXED.<br/><br/>
+
+The date field type didn't work properly during insert/update/search and produced a "Notice: Undefined property" message. FIXED.<br/><br/>
+
+Master/details view didn't work correctly with SQLite and produced a "Call to undefined method PDOStatement::MoveFirst()" message. FIXED.<br/><br/>
+
+When a new item was inserted in a master-details view, the default "parent" item wasn't selected if the field name of the parent table and the (fk) field name of the items table were different. FIXED.<br/><br/>
+
+<b>Other changes</b><br/><br/>
+The "Known bugs and limitations" section of the documentation has been updated, highlighting a new date-field related bug; the lack of a locking mechanism during records editing has also been highlighted in the documentation, since the current behaviour could lead to unexpected results and data loss.
+
+<br/>
+
+<h1>February 2, 2011<br>
+v. 4.4 alpha<br></h1><hr size="1">
+
+<b>New features and feature changes</b><br/><br/>
+DaDaBIK now supports <a href="http://www.sqlite.org/">SQLite</a><br/><br/>
+
+A new content type "timestamp" is available. The corresponding field must contain an integer, which is displayed as a date and time according to the format chosen with the paramenter $date_format.<br/><br/>
+
+magic_quotes_sybase = on in php.ini is no longer required for Oracle and MS SQL Server<br/><br/>
+
+The documentation is now more clear about the master/details view.<br/><br/>
+
+A new parameter, $timezone, allows to set the timezone.<br/><br/>
+
+The sql logging feature is not available anymore.<br/><br/>
+
+<b>Fixed bugs</b><br><br>
+
+The authentication didn't work if DaDaBIK was installed in the root of a Website (e.g. www.mysite.com and not www.mysite.com/dadabik).<br/><br/>
+
+DaDaBIK produced an error about date_default_timezone_set if the PHP version was < 5.1.<br/>
+
+
+<h1>December 8, 2010<br>
+v. 4.3 final<br></h1><hr size="1">
+
+<b>Fixed bugs and feature changes<br><br></b>
+The TinyMCE version used to implement the rich_editor is now the 3.3.9.2 . This can fix security problems and other issues that the old TinyMCE version used could cause.
+<br><br>
+
+Some MAC OS not needed files were included in the DaDaBIK release. Fixed (thanks Tobias S. for pointing out).<br><br>
+
+On Windows Vista (and maybe on other Operating Systems), some warnings about encoding were displayed by the system during the extraction of the zip release file. Fixed (thanks Tobias S. for pointing out).<br><br>
+
+DaDaBIK showed a "delete all" link for an items table even if the delete operation was disabled for that table. The "delete all" operation, however, wasn't executed. Fixed.<br><br>
+
+After a "delete all" operation performed on a master/details view, DaDaBIK showed the results view of the details table instead of coming back to the master/details view. Fixed.<br><br>
+
+DaDaBIK now shows a table alias near to the "insert item" link.<br><br>
+
+Minor change to the English interface<br><br>
+
+A small banner is now showed in the homepage of the admin interface.<br><br>
+
+The changelog didn't contain the changes for DaDaBIK 4.3 beta. Fixed.
+
+<br>
+
+
+<h1>November 28, 2010<br>
+v. 4.3 beta RC2 (release candidate 2)<br></h1><hr size="1">
+
+<b>New features, fixed bugs and feature changes<br><br></b>
+DaDaBIK, with some PHP versions and error reporting settings, produced some "Deprecated" and "Strict Standard" warnings. This was due to the ADOdb version used, which was too old. DaDaBIK now uses the last ADOdb version for PHP5 and automatically load the last PHP4 compatible ADOdb library if you are still using PHP4. This can also fix security problems and other issues that the old ADOdb version used could cause.
+<br><br>
+
+The single-donation button of the admin section didn't work.<br><br>
+
+A lot of not strictly-needed files has been removed from the official release, which is now lighter.<br><br>
+
+It is now possible to to send feedback on DaDaBIK to hotscripts.com directly from the admin section.<br><br>
+
+The documentation didn't explain how to upgrade to 4.3 rc1. Fixed.
+<br>
+
+<h1>November 23, 2010<br>
+v. 4.3 beta RC1 (release candidate 1)<br></h1><hr size="1">
+
+<b>New features and feature changes<br><br></b>DaDaBIK has a new administration section: new look, some improvements in the interface, in-line help for the interface configurator, possibility to send feedback, to donate and to buy email/phone commercial support. The configuration file has been improved in clarity too.<br><br>It is now possible to choose if a table can appear in the table list menu.<br><br>The "home" button, which had been deleted, is now available again.<br><br>If a table is an "items table" in a master-details view, the insert/search/show all/last search results top buttons are not anymore displayed,<br><br>The documentation has been completely revised, clarifying some aspects when needed and highlighting some new known bugs/limitations.<br><br>Minor GUI enanchements.<br><br><b><br>Fixed bugs</b><br><br>DaDaBIK 4.3 beta3 in a case-sensitive environment didn't include the htmLawed library because of a mistake in the case of a letter. This leave DaDaBIK exposed to the security risk that version 4.3 beta3 was supposed to fix (see 4.3 beta 3 changelog's entry for details). A "Warning: include(./include/htmlawed/htmlawed.php) : failed to open stream" warning messase could also be produced. Thanks to <a href="http://www.dadabik.org/forum/profile.php?1,65597">Kaiya</a> for pointing this out.<br><br>
+With PHP &lt; 4.1.0 and DaDaBIK 4.3 beta, beta2 or beta3 there could be
+problems with the escaping procedure, this could lead to various
+problems (even security problems).<br><br>The URL validation didn't work as expected.<br><br>The enable/disable features control didn't work as expected.<br><br>If the first table present in the table list menu was empty (no records), DaDaBIK didn't show the table list menu.<br><br>When $enable_browse_authorization was enabled, using the previous-next links DaDaBIK tried to show also non-authorized records; the records details weren't showed but a message "You don't have the authorization to view this record." was displayed.<br><br>DaDaBIK, if a table was used as "items" table, didn't correctly take into consideration the permissions (insert, edit, details, delete) set in order to display the corresponding controls.<br><br>When a record is deleted, now also the files linked to the record are deleted. Is it possible to control this behaviour changing the new config parameters delete_files_when_delete_record.<br>
+
+<h1>November 15, 2010<br>
+v. 4.3 beta3</h1><hr size="1">
+
+<b>Fixed bugs and changes</b><br><br>
+
+If a DaDaBIK application was configured to use at least one html content type field or one rich_editor field type field, a malicious user who had access to the application could insert in the field some arbitrary javascript code, which was then executed by other users just by using the application.
+Among other problems, this could lead to XSS attack (<a href="http://en.wikipedia.org/wiki/Cross-site_scripting">http://en.wikipedia.org/wiki/Cross-site_scripting</a>), which in turn could allow an unauthorized access to the application (<a href="http://en.wikipedia.org/wiki/Session_hijacking">http://en.wikipedia.org/wiki/Session_hijacking</a>) and, if the Internet browser of the user contained security holes, even the execution of arbitrary code in the client machine. The problem is now fixed applying a filter provided by the htmLawed library (<a href="http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed">http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed</a>) when the output is displayed. You must however keep in mind that, as the documentation states (<a href="http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/htmLawed_README.htm#s2.8">http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/htmLawed_README.htm#s2.8</a>), there are some minor cases in which htmLawed can fail.<br><br>
+
+Since htmLawed requires at least PHP version 4.3, even the PHP minimum version requirements of DaDaBIK have changed from 4.05 to 4.3.
+
+<h1>November 11, 2010<br>
+v. 4.3 beta2</h1><hr size="1">
+
+<b>Fixed bugs</b><br><br>
+
+If in a DaDaBIK application the insert or edit feature was enabled (at least for one table) and a select_single field type was used (at least once, even in another table), a malicious user who had access to the application could in many cases insert in a listbox some arbitrary javascript code, which was then executed by other users just by using the application.
+Among other problems, this could lead to XSS attack (<a href="http://en.wikipedia.org/wiki/Cross-site_scripting">http://en.wikipedia.org/wiki/Cross-site_scripting</a>), which in turn could allow an unauthorized access to the application (<a href="http://en.wikipedia.org/wiki/Session_hijacking">http://en.wikipedia.org/wiki/Session_hijacking</a>) and, if the Internet browser of the user contained security holes, even the execution of arbitrary code in the client machine. This problem have been fixed in version 4.3 beta2.<br>The problems described above can occur even when the insert or edit feature was enabled (at least for one table) and the HTML content type is used; at the moment there isn't a patch for this second scenario, the HTML content type should be used carefully, as highlighted in the upgraded documentation.<br><br>
+
+
+DaDaBIK didn't show the default edit, delete and delete icons.
+
+<h1>October 21, 2010<br>
+v. 4.3 beta</h1><hr size="1">
+<b>New features and feature changes</b><br><br>
+
+DaDaBIK has now a new and better Graphic User Interface.<br><br>
+
+Having magic_quotes_gpc set to On is not anymore needed.<br><br>
+
+The documentation, in particular the "Known bugs and limitations" sections, has been updated.<br><br>
+
+<b>Fixed bugs</b><br><br>
+
+DaDaBIK showed a notice error message when the previous/next button was used after an error on update (e.g. a missing field); now the buttons are not anymore displayed.<br><br>
+
+DaDaBIK produced a "Undefined variable" notice when showing results and nor records were found.<br><br>
+
+DaDaBIK could display a deprecated warning related to eregi if used together with PHP &gt;= 5.3<br><br>
+
+The upgrade file upgrade_4.3.php was not adodb-compatible and therefore probably didn't work with all the DBMS supported.
+
+<h1>September 14, 2010<br>
+v. 4.3 alpha</h1><hr size="1">
+<b>New features and feature changes</b><br><br>
+
+DaDaBIK now supports a master/details view: for example if you have an <i>albums</i> table and a <i>songs</i> table you can set DaDaBIK to display in the same page the details of an album and the result list of the songs linked to.<br><br>
+
+The documentation, in particular the "Security" and "Multiple function views" sections, have been updated.<br><br>
+
+<b>Fixed bugs</b><br><br>
+
+DaDaBIK didn't correctly execute a search based on a field if, for that field, you choosed from the interface configurator just one search operator.<br><br>
+
+DaDaBIK showed a javascript error message when a results view was displayed.
+
+<h1>February 18, 2007<br>
+v. 4.2</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+The Rumanian language is now complete.
+
+<h1>February 8, 2007<br>
+v. 4.2 beta</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+Previous and next buttons didn't work correctly after an update operation which caused an error (for example for a missed required field value) and now are not displayed any more in the above case.<br><br>
+
+<b>New features and feature changes</b><br><br>
+
+DaDaBIK now handles the NULL values, it is now possible to insert a NULL value in a field and to search for NULL values.<br><br>
+
+New search operator available: is empty.<br><br>
+
+The required fields are now displayed using a * sign, instead of using a different color.<br><br>
+
+The documentation, in particular the "Known bugs and limitations" section, has been updated.
+
+<h1>January 18, 2007<br>
+v. 4.1 final release</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+After a login or a "Show all" operation the order type stored for the current table was not cleaned, as expected.<br><br>
+
+In some particular cases, the previous and next record links didn't work and DaDaBIK produced a "Notice: Undefined index:..." message.<br><br>
+
+For a linked field, DaDaBIK didn't use its own type and content in order to correctly display it in the results and details view.
+
+<h1>January 14, 2007<br>
+v. 4.1 release candidate 3</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+DaDaBIK version 4.1 rc2 produced a "[08] Error: during query execution." error message during the installation.
+
+<h1>January 14, 2007<br>
+v. 4.1 release candidate 2</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+The "refresh installation" admin operation didn't work correctly and could lead to an interface configurator settings loss. Please note that this bug can appear even on a DaDaBIK version &gt;= 4.1 rc2 if the installation is the result of an upgrade from a version &lt; 4.1 rc2; the bug is considered fixed only for tables installed (DaDaBIK installation from scratch or single table installation from the admin interface) using a DaDaBIK version &gt;= 4.1 rc2.<br><br>
+
+DaDaBIK in some cases produced an "[08] Error: during query execution." error message if the user clicked on the previous or next record links.<br><br>
+
+DaDaBIK lost the "Field present in the details page?" option setting after a "Refresh installation" procedure.<br><br>
+
+Rumanian language is now complete.<br><br>
+
+Some CSS style settings were repeated twice in css/styles_screen.css, in some cases using different values.<br><br>
+
+The documentation has been revisited, in particular the upgrade process is now clearer and a new known bug has been added to the documentation.<br><br>
+
+If one or more tables name were particularly long DaDaBIK could produce a "[08] Error: during query execution." error message on Oracle during the DaDaBIK installation or during a single table installation.<br><br>
+
+The default upper limit for the year part of a date is now 2010.<br><br>
+
+styles_print.css code clean-up.
+<br><br>
+
+<b>New features and feature changes</b><br><br>
+
+The pdf file extension is now allowed by default for file upload.
+
+<h1>November 13, 2006<br>
+v. 4.1 release candidate 1</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+If a table was empty and the user selected it, the tables listbox disappeared so it was impossible to choose another table.<br><br>
+
+The upgrade script upgrade_4.1.php had the name of one of the DaDaBIK tables hard-coded; this could lead to problems during the upgrade process if the $table_list_name (confgi.php) variable value was not "dadabik_table_list".<br><br>
+
+The upgrade script upgrade_4.1.php didn't work correctly on Oracle.<br><br>
+
+Portuguese language  is now complete.<br><br>
+
+Croatian language is now complete.<br><br>
+
+Swedish language was not present in the documentation languages list.
+
+<h1>October 24, 2006<br>
+v. 4.1 beta</h1><hr size="1">
+<b>New features and feature changes</b><br><br>
+
+Better form errors handling: if an error occurs when the user fills a form (e.g. an URL format is not correct), DaDaBIK will display again the form and point out the type of error.<br><br>
+
+E-mail notices: DaDaBIK sends an e-mail message to some specified people when a new record is inserted or an existent record modified.<br><br>
+
+Previous and next buttons are now available in edit and details views.<br><br>
+
+Also the administration pages are now protected by authentication (if enabled); only administrator users can enter the administration pages. Note that the installation file (install.php) is not protected, should be used only for the first installation and then removed.<br><br>
+
+DaDaBIK now remembers the last search executed on a table, even if you change table.<br><br>
+
+It is now possible to choose the number of result records displayed per page on the fly. DaDaBIK also saves the number choosed on a per-table base.<br><br>
+
+It is now possible to set an alias for each table, the alias is used in the table listbox instead of the table name.<br><br>
+
+DaDaBIK now uses tinymce 2.0.7 (<a href="http://tinymce.moxiecode.com">http://tinymce.moxiecode.com</a>) to implement the rich_editor field type instead of htmlarea. This leads to FireFox compatibily.<br><br>
+
+DaDaBIK now highlights a results table row when the mouse pointer is over it. It also highlights a results table row when the user click on it, until the user click it again. You can disable this feature by using the new config.php parameter $enable_row_highlighting.<br><br>
+
+Some changes in the layout element positions to increase usability.<br><br>
+
+Finnish language is now available.<br><br>
+
+A link to the administration page is now available and is displayed only if the user is an administrator.<br><br>
+
+DaDaBIK now display using a small arrow the current type of order (ASC or DESC).<br><br>
+
+By default, after an insert is now displayed the results view.<br><br>
+
+<b>Fixed bugs</b><br><br>
+
+During an insert, even if authentication and browse authorization were enabled, the similarity check procedure checked not only the records that the curent user owned, but all the records and showed the possible duplicates even if the current user didn't own them.<br><br>
+
+The documentation has been revisited, in particular it has been highlighted that Oracle needs magic_quotes_sybase = on set in php.ini.
+
+<h1>October 04, 2006<br>
+v. 4.0</h1><hr size="1">
+<b>New features</b><br><br>
+
+DaDaBIK now uses ADOdb version 4.92. This change fixes the "Notice: Only variable references should be returned by reference in..." messages.<br><br>
+
+Swedish language is now available<br><br>
+
+DaDaBIK installation process on Oracle is now clearer.<br><br>
+
+<b>Fixed bugs</b><br><br>
+
+On Oracle, from the record results view, several "Undefined index" notices were displayed, it was not possible to correctly enter the detail and the edit form of the records and the delete record function didn't work.<br><br>
+
+On Oracle 10, DaDaBIK tried to use the recycle bin tables too.<br><br>
+
+The documentation has been revisited.<br><br>
+
+In the install.php and header_admin.php scripts the name of the file index.php was hard-coded, instead of varying according to the $dadabik_main_file config variable.<br><br>
+
+The configuration file is now clearer about the $host parameter and specify the possible need of the instance name for MS SQL server
+
+<h1>January 24, 2006<br>
+v. 4.0 beta 2</h1><hr size="1">
+
+<b>Fixed bugs</b><br><br>
+
+There was some missing information in the documentation.
+
+<h1>January 24, 2006<br>
+v. 4.0 beta</h1><hr size="1">
+<b>New features</b><br><br>
+
+DaDaBIK officially supports Oracle and MS SQL Server DBMS. A special thanks to Claude Moreau (claude dot moreau dot olom at gmail dot com) for the great work he did on the Oracle porting.<br><br>
+
+The Hungarian and Slovak languages are now available.<br><br>
+
+The documentation has been improved and a new section "Coding guidelines" has been added.<br><br>
+
+DaDaBIK now checks for duplications by default for the username field of the users table.<br><br>
+
+It is now possible to set the CSV creation time limit; this can fix the problems related to the CSV creation time limit errors.<br><br>
+
+Two DaDaBIK buttons are now available ("buttons" folder).<br><br>
+
+<b>Fixed bugs</b><br><br>
+
+DaDaBIK didn't display correct search result values when the same field name appears in two linked tables as linked field. This bug, supposed to be fixed in the 3.1 beta release, is now really fixed.<br><br>
+
+DaDaBIK showed a wrong list of result records for a search if $enable_authentication and $enable_browse_authorization were enabled and the user specified more than one search criteria, setting also "Any of the conditions required".<br><br>
+
+The required property didn't work properly with file types, now the setting of a file-type field as "not required" is not needed any more. Thanks to alpha2zee (drpatnaik at yahoo dot com) who proposed the first version of the patch.<br><br>
+
+DaDaBIK produced a "Fatal error: Call to undefined function: newadoconnection()" message if upgrade.php or upgrade_3.2.php were executed.<br><br>
+
+DaDaBIK produced a "Notice: Undefined variable: upgrade...." message when upgrade.php was executed.<br><br>
+
+In the login.php script the name of the file index.php was hard-coded, instead of varying according to the $dadabik_main_file config variable.<br><br>
+
+DaDaBIK didn't display the "create password" after a user adding if $insert_again_after_insert was set to 1.<br><br>
+
+DaDaBIK displayed some messages in English even if the language set was "Italian".
+
+<h1>June 20, 2005<br>
+v. 4.0 alpha</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+DaDaBIK produced some "Notice: Undefined variable....." messages and a "[08] Error: during query execution" error message in the details or edit view (if $enable_browse_authorization was enabled) or after a delete (if $enable_delete_authorization was enabled) or update (if $enable_update_authorization was enabled); only if $enable_authentication was enabled and the current table or the ID_user field name needed to be quoted.<br><br>
+
+If the $autosumbit_change_table_control parameter was set to 1 the tables listbox form in the administration section was not auto-submitted "on change" and a javascript error was produced when the current table was changed.<br><br>
+
+<b>New features</b><br><br>
+DaDaBIK uses now the <a href="http://adodb.sourceforge.net/">ADOdb</a> Database Abstraction Library in order to support as many DBMS as possible, at the moment it has been tested just with MySQL 4.0.x and PostgreSQL 8.x.<br><br>
+
+SQL logging: it is now possible to configure DaDaBIK for logging all SQL queries in the adodb_logsql table ($enable_sql_logging parameter in config.php)<br><br>
+
+The documentation has been revised.<br><br>
+
+<h1>June 4, 2005<br>
+v. 3.2</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+If two or more DaDaBIK installations were hosted under the same domain, if a user logged into one of them it was possible to access all the others bypassing the login procedure. DaDaBIK session cookies are now valid only for the directory where DaDaBIK is installed (set through the new configuration variable $site_path).<br><br>
+
+DaDaBIK produced a parse error if the Portuguese language was used.<br><br>
+
+Croatian translation is now complete.<br><br>
+
+DaDaBIK produced a "[08] Error: during query execution" error message in the results view if the table in use or the current "order by" field name needed to be quoted and the current "order by" field hadn't any linked fields.<br><br>
+
+The possible duplications results view didn't show linked field values and produced a "Notice: Undefined index....." error message if one ore more fields had linked fields (<a href="http://www.dadabik.org/forum/read.php?f=1&amp;i=4302&amp;t=4154">http://www.dadabik.org/forum/read.php?f=1&amp;i=4302&amp;t=4154</a>).<br><br>
+
+<b>New features</b><br><br>
+Added two known bugs to the documentation, in particular it has been highlighted a possible security problem of the DaDaBIK authentication model.<br><br>
+
+
+<h1>March 31, 2005<br>
+v. 3.2 beta</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+DaDaBIK produced a "[08] Error: during query execution" error message in the details view if, for a field, the primary key field name of the main table was the same of the primary key field name of the linked table.<br><br>
+
+All the "Undefined variable" error messages have been fixed, DaDaBIK can now works correctly with error_reporting = E_ALL.<br><br>
+
+DaDaBIK lost the "Other choices allowed?" option information after a "Refresh installation" procedure (administration interface).<br><br>
+
+DaDaBIK produced a "[08] Error: during query execution" error message if, during an insert or update, a new option was added to a select_single field with no linked fields and at least one of the preexisting options contained a character to be escaped (e.g. ').<br><br>
+
+DaDaBIK produced a "[08] Error: during query execution" error message if, during an insert or update, there was at least one select_single field with linked fields, $enable_authentication and $enable_browse_authorization were enabled, the table contains an ID_user field and the linked table doesn't contain any ID_user fields with the same field name.<br><br>
+
+An Italian sentence was not correct.<br><br>
+
+DaDaBIK produced a parse error message if the German language was used<br>(<a href="http://www.dadabik.org/forum/read.php?f=1&amp;i=3432&amp;t=3432">http://www.dadabik.org/forum/read.php?f=1&amp;i=3432&amp;t=3432</a>).<br><br>
+
+In the footer page the name of the file index.php was hard-coded, instead of varying according to the $dadabik_main_file config variable.<br>
+(<a href="http://www.dadabik.org/forum/read.php?f=2&amp;i=371&amp;t=371">http://www.dadabik.org/forum/read.php?f=2&amp;i=371&amp;t=371</a>).<br><br>
+
+Config variable $always_add_blank_option_search didn't work correctly, the variable is not used any more and now DaDaBIK always add a blank option to the select_single fields.<br><br>
+
+<b>New features and feature changes</b><br><br>
+
+The authentication code has been in part rewritten:
+<ul>
+	<li>The class simpleLogin (<a href="http://www.phpclasses.org/browse/package/1492.html">http://www.phpclasses.org/browse/package/1492.html</a>) is not used any more
+	</li><li>DaDaBIK stores now user information in the database and passwords are now md5 encrypted
+	</li><li>It is also possible to use a pre-existent users table
+	</li><li>You can use DaDaBIK itself in order to add and delete users, show and modify users information
+	</li><li>The admin pages (admin.php, install.php) are not login-protected any more, you have to provide your own protection
+	</li><li>A select_single field with linked fields now shows a listbox with all the corresponding linked table records, regardless of the ownership.
+</li></ul>
+
+Six new languages are available: Croatian, Polish, Catalan, Estonian, Rumanian, Portuguese.<br><br>
+
+A "top" link has been added to the HTML footer.<br><br>
+
+The documentation has been updated and improved, in particular a FAQ section is now available.<br><br>
+
+The installation procedure has now more explicative messages.<br><br>
+
+
+<h1>July 19, 2004<br>
+v. 3.1 beta</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+DaDaBIK produced a "[08] Error: during query execution" when a linked table was referenced more than once in the same table.<br><br>
+
+DaDaBIK didn't display correct result values when the same field name appears both in a table and in a linked table as linked field or in two linked tables as linked field.<br><br>
+
+
+<b>New features</b><br><br>
+DaDaBIK has now a rewritten engine that perform the select query using joins and aliases (this fixes the bug above)<br><br>
+
+A basic authorization model is available, it is now possible to allow a user to delete only his own records, modify only his own records, view only his own records. For the authentication the class simpleLogin (<a href="http://www.phpclasses.org/browse/package/1492.html">http://www.phpclasses.org/browse/package/1492.html</a>) has been (probably temporary) used, but it is possible to easily customize the authentication.<br><br>
+
+A new field type is available: <i>rich_editor</i>; it is a rich text editor (htmlArea 2.03 by interactivetools.com <a href="http://www.interactivetools.com/products/htmlarea/">http://www.interactivetools.com/products/htmlarea/</a>) that allows to easily insert/modify HTML content<br><br>
+
+A new content type is available: <i>html</i>, DaDaBIK doesn't perform a conversion from special characters to HTML entities with <i>htmlspecialchars</i> for the fields having this content type<br><br>
+
+DaDaBIK starts now displaying the records of the first table available, without showing the home page menu. All the application (except from the administration area) uses now just one file index.php, easily renameable to embed it in a pre-existent Web site.<br><br>
+
+An upgrade script is now available, it is possible to upgrade from 3.0 beta or 3.0 to 3.1 beta without loosing the interface configurator settings.<br><br>
+
+A new parameter $enable_delete_all_feature allows to enable/disable the <i>delete all</i> feature<br><br>
+
+
+<h1>May 25, 2004<br>
+v. 3.0</h1><hr size="1">
+<b>Fixed bugs</b><br><br>
+
+DaDaBIK produced a "[08] Error: during query execution" error when a table name contained blank spaces
+(<a href="http://www.dadabik.org/forum/read.php?f=1&amp;i=2136&amp;t=2136">http://www.dadabik.org/forum/read.php?f=1&amp;i=2136&amp;t=2136</a>).<br><br>
+
+DaDaBIK produced a "[08] Error: during query execution" error when the MySQL version was prior to 3.23.06.<br><br>
+
+DaDaBIK produced a "[08] Error: during query execution" error when a field has some linked fields associated and the primary key field is not numeric
+(<a href="http://www.dadabik.org/forum/read.php?f=1&amp;i=2365&amp;t=2365">http://www.dadabik.org/forum/read.php?f=1&amp;i=2365&amp;t=2365</a>).<br><br>
+
+DaDaBIK produced a "Call to undefined function: ob_clean()...." fatal error if the export to CSV feature was enabled and the PHP version was &lt; 4.2.0 (<a href="http://www.dadabik.org/forum/read.php?f=1&amp;i=2329&amp;t=2209">http://www.dadabik.org/forum/read.php?f=1&amp;i=2329&amp;t=2209</a>); the export to CSV now works also with PHP version prior to 4.2.0.<br><br>
+
+DaDaBIK produced a parse error when the Italian language was used.<br><br>
+
+Fixed some translations and added a missing sentence in the Italian language file.<br><br>
+
+The word "home" in the bottom links menu is now available in each language file and no more hard-coded.<br><br>
+
+DaDaBIK produced a "Undefined variable: mail_feature....." notice.<br><br>
+<b>New features</b><br><br>
+A new parameter $word_wrap_fix_width allows to choose if $word_wrap_col determines also the width of the column in the results table or not.<br><br>
+<b>Notes</b><br><br>
+The following two bugs have been discovered during the beta testing:<br><br>
+
+DaDaBIK produces a "[08] Error: during query execution" when a linked table is referenced more than once in the same table (<a href="http://www.dadabik.org/forum/read.php?f=1&amp;i=2374&amp;t=2374">http://www.dadabik.org/forum/read.php?f=1&amp;i=2374&amp;t=2374</a>).<br><br>
+
+DaDaBIK doesn't display correct result values when the same field name appears both in a table and in a linked table as linked field or in two linked tables as linked field.<br><br>
+
+These bugs will be fixed in the version 3.1 because they require to partially rewrite the engine that produce the SELECT statement.
+
+<br>
+
+
+<h1>March 10, 2004<br>
+v. 3.0 Beta</h1><hr size="1">
+All the code has been revisited and in some case rewritten in order to increase efficiency and clarity.<br>
+<br>
+<b>New features and feature changes</b><br>
+<br>
+The primary-foreign key feature is now complete: it is possible to link a field of a table (foreign key) to a number of fields of another table (containing the primary key). The produced HTML select menu will have the linked field values as "options" and the primary key values as "values". This allow to use a normalized db design.<br>
+<br>
+The "export to CSV" feature has been added: it is now possible to export the current result records to a CSV file.<br>
+<br>
+The speed of DaDaBIK when the database managed contains a lot of tables is now dramatically increased.<br>
+<br>
+"Delete all" feature is now available: it is possible to delete all the current result records.<br>
+<br>
+It is now possible to handle all the HTML produced by DaDaBIK by the CSS file, which is now very clear and complete, a new CSS file specific for printing has been also added.<br>
+<br>
+It is now possible to order result records both in ASC and DESC.<br>
+<br>
+The HTML produced by DaDaBIK is now more clean and complete than before.<br>
+<br>
+If no order field is specified, the result records are displayed ordered by the first field present in the results table.<br>
+<br>
+Two new select operators have been added: "starts with" and "ends with"<br>
+<br>
+The confirmation message of a delete operation is now a javascript prompt confirmation message (it is possible to disable it through config.php, however).<br>
+<br>
+After a delete operation DaDaBIK now display again the results page.<br>
+<br>
+The alternate row colors feature is now available. The record results table is now displayed using alternate row colors.<br>
+<br>
+When you save a record, now the edit form is displayed again on the screen.<br>
+<br>
+When you insert a new record, you can now choose (through config.php) if you want to see again the insert form, otherwise the results table is again displayed.<br>
+<br>
+Edit, delete and details buttons are now normal links (not HTML forms as before) and pass all the necessary values via GET, so it is now possible to call the detail page of a record from its own unique URL.<br>
+<br>
+Documentation, administration interface and config.php file are now more clear and complete than before.<br>
+<br>
+Each DaDaBIK error message has now a code, in order to identify it better, especially during bug reports.<br>
+<br>
+DaDaBIK messages are now displayed everywhere needed and are more clean than before.<br>
+<br>
+It is now possible to disable the displaying of the search/insert/update buttons at the top of the form through config.php.<br>
+<br>
+It is now possible to change the select operator names (is equal/contains/greater than/less than/starts with/ends with) according to the language<br>
+<br>
+The function that validate URLs now support port numbers, https protocol and four letters primary domain name (e.g. .info).<br>
+<br>
+The validity of a date field is now checked during insert/update.<br>
+<br>
+The word wrap column choosen in config.php now determines also width of the columns in the results table; the width is now fixed and equal for all column.<br>
+<br>
+It is now possible to choose (through config.php) if always wrap words at the $word_wrap_col column, even if it is necessary to cut them.<br>
+<br>
+DaDaBIK now use the $_GET $_POST $_FILES....variables introduced in PHP 4.1.0<br>
+<br>
+The change table select menu is now an auto-submit one (it is possible to disable this feature through config.php, however).<br>
+<br>
+The update statements now use "LIMIT 1" to ensure that only one record is updated, but only if the MySQL version is &gt;= 3.23.<br>
+<br>
+A blank first option is always added to select_single fields when a search form is produced (it is possible to disable this feature through config.php, however).<br>
+<br>
+The select_multiple field types are not handled any more, at least for the moment.<br>
+<br>
+Linking tables contained in different databases isn't handled any more.<br>
+<br>
+DaDaBIK no more display automatically a column sign (":") after each label.<br>
+<br>
+<b>Fixed bugs:</b><br>
+DaDaBIK didn't update correctly a record when the "Other...." option of a select_single field was used.<br>
+<br>
+DaDaBIK produced an error when tried to display the possible duplicates during an insert operation if some field names need back quotes.<br>
+<br>
+DaDaBIK produced an error when the user clicked on a result page link and the current "order by" field needed to be url encoded.<br>
+<br>
+DaDaBIK produced an error when tried to retrieve values of a select_single from another table if some field or table names need back quotes.<br>
+<br>
+Field order changer didn't work properly: field positions weren't shifted correctly.<br>
+<br>
+DaDaBIK check the similarity of records during and insert operation by using a case sensitive function, this was not correct.<br>
+<br>
+DaDaBIK failed to handle properly the upload when the uploaded file name contained a single quote.<br>
+<br>
+DaDaBIK displayed a broken image link if a record containing an image_file field had no images associated. This happened only with MS IE as a browser.<br>
+<br>
+Fixed the bug that produced a "Warning:  stat failed...." message sometimes during an upload.<br>
+<br>
+DaDaBIK lost the value associated with the "Other choices allowed" parameter when, from the administration interface, you clicked on "Refresh internal table".<br>
+<br>
+Upload failed when two files with the same name were uploaded in the same time.<br>
+<br>
+Word wrap feature now works also with email and url fields.<br>
+<br>
+Back quotes were used only if the MySQL version was &gt; 3.23.6, even if also MySQL 3.23.6 supports them, now are used if the MySQL version is &gt;= 3.23.6 <br>
+<br>
+It was possible, by maliciously changing the HTML of a form produced by DaDaBIK when possible duplicated were found and post it, to bypass fields check.<br>
+<br>
+DaDaBIK didn't show the SQL statement ($display_sql set to 1) related to a search if no records were found.<br>
+<br>
+<h1>March 11, 2003<br>
+v. 2.2.1</h1><hr size="1">
+
+<b>Fixed bugs</b><br>
+<br>
+When a record containing an image_file or generic_file field was updated without uploading a new file, the record loosed the link with the old file; this bug has been fixed.<br>
+<br>
+When a user perform a search in a table containing an image_file or generic_file field the "browse" button was displayed by the browser for those fields, this behavior makes no sense; this bug has been fixed.<br>
+<br>
+The field names of the where clause in the update statements were not back quoted, consequently the update failed if the name of the primary key field needed to be escaped (e.g. a reserved word), this bug has been fixed.<br>
+<br>
+The dutch version of DaDaBIK produced a parse error, this bug has been fixed.<br>
+<br>
+<br>
+<b>New features</b><br>
+It is now possible to choose if you want to delete (both in the database and phisically) a previously uploaded file.<br>
+<br>
+When two or more files with the same name are uploaded, a new name is assigned automatically (e.g. my_file.txt become my_file_2.txt if my_file.txt already exists, my_file_3 if also my_file_2 already exists and so on).<br>
+<br>
+It is now possible to configure DaDaBIK to accept all files (regardless to the extensions) coming from upload.<br>
+<br>
+Since DaDaBIK requires to set magic_quotes_gpc = on in php.ini (which is the default setting), now if magic_quotes_gpc is off DaDaBIK will stop and display an error message.<br>
+
+<h1>Novermber 9, 2002<br>
+v. 2.2.1 beta</h1><hr size="1">
+The bug that caused the lost of the correct search results when the user click on a page number, supposed to be fixed in the previous release, is now completely fixed.<br>
+<br>
+The version of the MySQL server is now correctly checked, in this way the "Your database is empty" bug, supposed to be fixed in the previous release, is now completely fixed.<br>
+<br>
+A known bugs document is now available.<br>
+<h1>October 22, 2002<br>
+v. 2.2 beta</h1>
+Support for file uploading (images and other) is now available.<br>
+The bug that caused the lost of the results order when the user click on &gt; has been fixed.<br>
+The bug that caused the lost of the correct search results when the user click on a page number has been fiexed.<br>
+Fixed the bug that prevented the internal table manager to work correctly when the result order is changed.<br>
+The version of the MySQL server is now checked, in this way the "Your database is empty" bug has been fixed.<br>
+The numeric type now accepts also float and other numeric fields.<br>
+<h1>July 31, 2002<br>
+v. 2.1b beta</h1><hr size="1">
+<br>
+Web and e-mail fields weren't display correctly in the version 2.1 beta. The bug is fixed with tihs version.<br>
+<h1>July 30, 2002<br>
+v. 2.1 beta</h1><hr size="1">
+A new, lighter and easier to use administration interface (related to the internal table manager) is available.<br>
+<br>
+The form has now a better layout, all the fields are correctly aligned, including dates.<br>
+<br>
+All the translations are now up-to-date.<br>
+<br>
+It is now possible, for select_single fields, to choice "other" during an insert and fill a textbox by hand with an alternative value. That value also update the select options, unless option had driven with a custom query ("SQL:......").<br>
+<br>
+It is now possible to choice if a field has to be displayed in the details page or not.<br>
+<br>
+Completely fixed the bug the caused the warning message: "Warning: Call-time pass-by-reference has been deprecated......" with particular php.ini settings<br>
+<br>
+It is now possible to use the "-" sign and other allowed signs in MySQL table and field names.<br>
+<br>
+Fixed a bug that prevent some text to be displayed if written after a special html char (e.g. &lt;).<br>
+<br>
+Fixed a bug that prevent to choose more than 999 characters as maxlength of a field.<br>
+<br>
+Fixed a bug related to the use of the double quote in the include statements, that can cause error messages.<br>
+<br>
+Textbox and password fields are now checked for max lenght also server side.<br>
+<br>
+Select_single fields are now checked for length and type, this improve security because a malicious user could change the html of the form and then post it.<br>
+<h1>Jun 28, 2002<br>
+v. 2.0.1 beta</h1><hr size="1">
+DaDaBIK is now compatible with PHP 4.2, and works also with register_global directive set to off.<br>
+Added two new date display formats, which fix the problem of displaying dates before 1970<br>
+Fixed a bug that caused the insert of a separator if a select_multiple_menu or a select_multiple_checkbox were empty<br>
+The "Any/all" conditions menu now appers also in Netscape and other browsers.<br>
+Fixed some minor bugs that caused warnings and notices.<br>
+<h1>Jun 1, 2002<br>
+v. 2.0 beta</h1><hr size="1">
+Support for multiple tables available.<br>
+"View all records" feature.<br>
+It is now possible to order a group of record by a field clicking on the corrisponding coloumn.<br>
+The pages navigation tool has been improved.<br>
+Fixed a bug about size of input field in Netscape.<br>
+Fixed a bug that about the color of the required fields in the search form.<br>
+<h1>Apr 21, 2002<br>
+v. 1.9.1</h1><hr size="1">
+Fixed a bug that allowed an attacker to execute arbitrary sql query on the database (e.g. insert or delete records even if insert and delete feature were disabled).<br>
+<br>
+Fixed a bug about double quotes handling in the search function.<br>
+<br>
+All DaDaBIK users are encouraged to update to the latest version.<br>
+
+<h1>Apr 15, 2002<br>
+v. 1.9</h1><hr size="1">
+Fixed the bug that caused an error during the insert if you didn't enable the check similiarity for any fields.<br>
+<br>
+Fixed the bug that caused a "Required field" message even if a date field was filled by the user.<br>
+<br>
+Fixed the bug the caused a warning message if allow_call_time_pass_reference is set to false in php.ini.<br>
+<br>
+Added Spanish and French versions.<br>
+<h1>Mar 18, 2002<br>
+v. 1.8</h1><hr size="1">
+The algorithm that scans existing records during an insert in order to find similar records is now more efficient (e.g. for a table with &gt;8000 records, 2 fields to check, it is now 5 times faster than before).<br>
+<br>
+Update now works also with a MySQL version &lt; 3.23.x<br>
+<br>
+Fixed the bug that caused an error if a date field was initally null.<br>
+<h1>Feb 28, 2002<br>
+v. 1.7</h1><hr size="1">
+<b>New features:</b><br>
+A new administration interface is now available and allows you to manage the internal table without any other software!! So you don't need PHPMyAdmin any more in order to customize DaDaBIK.<br>
+<br>
+Configuration is now easier.<br>
+<br>
+Debug mode added.<br>
+<h1>Feb 11, 2002<br>
+v. 1.6</h1><hr size="1">
+<b>New features:</b><br>
+It is now possible to disable the functions: insert, update, delete and details; in this way you can safety use DaDaBIK in a public site.<br>
+<br>
+New administration interface for the internal table.<br>
+<br>
+The installation procedure is now more explicative.<br>
+<br>
+New customizable graphic icons for edit/delete/details buttons.<br>
+<br>
+You can now choice the coloumn at which a text, textarea, password or select sinlge field will be wrapped in the results.<br>
+<br>
+It is now possible to choice the target window for edit/details (self or new).<br>
+<br>
+The graphic layout of the form looks now better with Netscape.<br>
+<br>
+German translation added.<br>
+<h1>Jan 27, 2002<br>
+v. 1.5b</h1><hr size="1">
+<br>
+In the version 1.5 I missed the code line that allow to use the dutch version, the version 1.5b include a fix to that bug together with a config.php file more precise.<br>
+<h1>Jan 26, 2002<br>
+v. 1.5</h1><hr size="1">
+<br>
+DaDaBIK is now considered out of beta and has some important new features, for this reason I decided to call this release 1.5 (the last was 1.1 beta)<br>
+<br>
+<b>New features</b><br>
+Partial foreign key support: it is now possibile to drive the possible options of a "select_multiple" or "select_single" field from another table, even with a customized SQL query!!<br>
+<br>
+It is now possible to select between any/all the conditions during a search<br>
+<br>
+It in now possible to display a select_multiple field also with a menu (HTML select multiple tag)<br>
+<br>
+For each field you can now specify a prefix value (e.g. http://) and a default value<br>
+<br>
+For each field you can now specify which operator the user can use, including exactly, like, &gt;, &lt;<br>
+<br>
+A Dutch version of DaDaBIK is now available<br>
+<br>
+An on-line demo is now available<br>
+<br>
+<b>Minor bug fixed</b><br>
+The results of a search are now displayed taking the carriage return (\n) into account.<br>
+<h1>Jan 14, 2002<br>
+v. 1.1 beta</h1><hr size="1">
+<br>
+<b>New features:</b><br>
+According to user's needs, now the internal table and the main table are in the same database, so you don't need two databases in order to run DaDaBIK.<br>
+It is now possible to specify the order of a field in the form.<br>
+<br>
+<b>Fixed bugs:</b><br>
+Required fields message now apper only if there are at least one required field.<br>
+Search of a "select single" field with exact/like feature enabled now works.<br>
+Some updates didn't work, now the bug has been fixed.<br>
+Bug about searching by date fixed, now you can search properly a record by date using &lt; or &gt;.<br>
+Time generated by insert_date and update_date are now in 0-24 format.<br>
+<h1>Dec 9, 2001<br>
+v. 1.0.5 beta</h1><hr size="1">
+Documentation:<br>
+The configuration file is now more explicative.<br>
+The readme file is now more explicative.<br>
+A new document about the internal database is now available.<br>
+New features:<br>
+Now you can select between an "exact match" or a "like" search also in the form, on the fly. (You can also disable this feature)<br>
+Hints are now visible even during the update procedure<br>
+Bugs fixed:<br>
+The maxlength property in the internal database now works<br>
+<br>
+A very small part of the function build_form() rewritten in order to make DaDaBIK more flexible.<br>
+<h1>Dec 5, 2001<br>
+v. 1.0.4 beta</h1><hr size="1">
+The readme file is now more explicative.<br>
+Two HTML-related bugs fixed: <br>
+the background of an empty cell now appears even with Netscape<br>
+the select input field now appear correctly even with Netscape<br>
+<h1>Dec 1, 2001<br>
+v. 1.0.3 beta</h1><hr size="1">
+Italian version added<br>
+Some english mistakes fixed<br>
+Configuration option (display the "I think that x is similar to y......" statement during duplication check) added<br>
+<h1>Nov 24, 2001<br>
+v. 1.0.2 beta</h1>
+One bug fixed (creation of the internal database didn't work due to bug in db_functions.php)<br>
+<h1>Nov 24, 2001<br>
+v. 1.0.1 beta</h1><hr size="1">
+Several bugs fixed (creation of the internal database didn't work, navigation buttons didn't work)<br>
+<h1>Nov 21, 2001<br>
+V. 1.0 beta</h1><hr size="1">
+The first release of DaDaBIK.

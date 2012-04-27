@@ -1,0 +1,445 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px ;
+	background-color: #d6d6d6;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+a {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: blue;
+}
+th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+input{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+select{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+option{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+textarea{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	border-style: outset;
+}
+hr{
+	height: 1px;
+	border-style: none;
+	color: black; /* need this for IE */
+	background-color: black;  /* need this for Mozilla */
+}
+
+/* used with subtitles ("Search for records", "Edit the record", etc.) */
+h3{
+}
+
+.button_form{
+border: 1px solid;
+background-color:#a9b299;
+}
+
+/* the main big table that contain all the page */
+.main_table{
+	width:100%;
+	height: 100%;
+	background-color: #d6d6d6;
+	padding: 10px; /* doesn't work with IE, cellpadding in header */
+	border-style: solid;
+	border-width: 0px;
+	border-color: black;
+	vertical-align: bottom;
+}
+
+
+/*******************************************************/
+/************************************************ RESULTS PAGE */
+
+/* "n records found" message */
+.n_results_found {
+	color:black;
+	font-weight: bold;
+}
+
+/* "page n of m" sentence */
+.page_n_of_m {
+	color:black;
+}
+
+/* links of the navigation bar ( << < 1 2 3......) */
+a.navig {
+	color:blue;
+}
+
+/* previous next links */
+a.previous_next {
+	color:blue;
+	text-decoration: none;
+}
+
+/* current page in the navigation bar ( << < 1 2 3......) */
+.navig {
+	color:black;
+}
+
+/* order by links */
+/* normal */
+a.order_link {
+	color:blue;
+	font-size: 14px;
+	font-weight:normal;
+	text-decoration: none;
+}
+/* currently selected */
+a.order_link_selected {
+	color:blue;
+	font-size: 14px;
+	font-weight:normal;
+	text-decoration: none;
+}
+
+/* the small arrow near the column head which represents currently the order by field */
+.arrow {
+	font-size: 14px;
+}
+
+
+/* results table */
+
+table.results {
+	background-color: #d6d6d6; /* used to make the table bordered */
+}
+
+/* result rows */
+/* results_1 and results_2 differ only for the background-color, this create the alternate row colors effect */
+.tr_results_1 {
+	font-size: 8pt;
+	vertical-align: top;
+	white-space: nowrap;
+	background-color: #EFEFEF;
+}
+.tr_results_2 {
+	font-size: 8pt;
+	vertical-align: top;
+	white-space: nowrap;
+	background-color: #ffffff;
+}
+
+.tr_highlighted_onmouseover{ /* a results table row when the mouse pointer is over it */
+	font-size: 8pt;
+	color: #ffffff;
+	vertical-align: top;
+	white-space: nowrap;
+	background-color: #a8b19b;
+}
+.tr_highlighted_onclick{ /* a results table row when the click on it */
+	font-size: 8pt;
+	color: #ffffff;
+	vertical-align: top;
+	white-space: nowrap;
+	background-color: #a8b19b;
+}
+
+/* coloumn headings */
+th.results {
+	background-color: #EFEFEF;
+	white-space: nowrap;
+}
+/* result cells */
+/* results_1 and results_2 differ only for the background-color, this create the alternate row colors effect */
+/*
+td.results_1 {
+	font-size: 8pt;
+	vertical-align: top;
+	white-space: nowrap;
+	background-color: #EFEFEF;
+}
+td.results_2 {
+	font-size: 8pt;
+	vertical-align: top;
+	white-space: nowrap;
+	background-color: #ffffff;
+}
+*/
+/* control (edit, delete, details) cells */
+/* results_1 and results_2 differ only for the background-color, this create the alternate row colors effect */
+td.controls_1 {
+	font-size: 8pt;
+	background-color: #EFEFEF;
+}
+td.controls_2 {
+	font-size: 8pt;
+	background-color: #ffffff;
+}
+
+.export_to_csv{
+}
+
+/* "Total records: n" sentence */
+.total_records {
+}
+
+/* links of the bottom menu (insert, search, show all) */
+/* now this links are on the TOP but keep the old name */
+a.bottom_menu{
+	color: black;
+	font-size: 18px;
+	text-decoration: none;
+}
+a.bottom_menu_active{
+	color: black;
+	font-size: 18px;
+	text-decoration: none;
+	background-color:#ffffff;
+	-webkit-border-radius:6px;
+	-moz-border-radius:9px;
+}
+a.bottom_menu:hover{
+background-color:#ffffff;
+-webkit-border-radius:6px;
+-moz-border-radius:9px;
+}
+
+/* home link */
+a.home{
+	color: black;
+	font-size: 18px;
+	text-decoration: none;
+}
+a.home:hover{
+background-color:#ffffff;
+-webkit-border-radius:6px;
+-moz-border-radius:9px;
+}
+
+/* change table combo box  */
+.select_change_table{
+}
+
+/* change table button */
+.button_change_table{
+}
+
+/* change records per page combo box*/
+.select_records_per_page{
+}
+/*******************************************************/
+
+/*******************************************************/
+/************************************************ FORM (insert, search and update form) */
+
+/* insert, save and search buttons */
+.button_form{
+}
+
+/* rows containing insert, save and search buttons */
+.tr_button_form {
+	text-align: center;
+}
+
+/* rows containing the all/any in the search form */
+.tr_operator_form{
+	text-align: center;
+}
+
+/* the cell that contains the label in the form */
+.td_label_form{
+	text-align: right;
+	vertical-align: top;
+}
+
+/* the cell that contains the input (textbox, textarea, etc) in the form */
+.td_input_form{
+	vertical-align: top;
+}
+
+/* the cell that contains the hint in the form */
+.td_hint_form{
+	vertical-align: top;
+}
+
+/* NULL word */
+.null_word{
+	font-style: italic;
+}
+
+/* error messages (e.g. "You haven't filled out some required fields...." */
+.error_messages_form{
+	color: red;
+}
+
+.change_table{
+	margin-top: 0px;
+	margin-left: 0px;
+	}
+
+
+/*******************************************************/
+/************************************************ DETAIL PAGE */
+/* the cell that contains the label */
+.td_label_details{
+	text-align: right;
+	vertical-align: top;
+}
+
+/* the cell that contains the value */
+.td_value_details{
+	vertical-align: top;
+}
+/*******************************************************/
+
+/*******************************************************/
+/************************************************ LOGIN FORM */
+.table_login_form{
+text-align: center;
+border-width:1px;
+border-color: #000000;
+border-style: solid;
+text-align:"center";
+background-color:#eeeeee;
+font-size:20pt;
+padding: 5px;
+}
+
+.tr_header_login_form{
+background-color:#a9b299;
+font-weight:bold;
+color:#ffffff;
+}
+
+.td_label_login_form{
+font-size:15pt;
+}
+
+.input_login_form{
+border-width:1px;
+border-color: #cccccc;
+border-style: solid;
+padding: 5px;
+font-size:20pt;
+}
+
+.login_button{
+border: 1px solid;
+background-color:#a9b299;
+
+}
+/*******************************************************/
+
+
+div.break {
+	page-break-before:always
+}
+table.labels {
+	width: 21cm
+}
+td.address {
+	height: 3.4cm;
+	width: 10cm;
+	text-align: left;
+	vertical-align: top;
+	margin-top: 10px;
+	margin-left: 10px;
+	font-size: 14px
+}
+td.marginvert {
+	width: 0.5cm
+}
+td.marginorizz {
+	height: 1.2cm
+}
+
+/* bottom right credits */
+.powered_by_dadabik{
+	font-size: 12px
+}
+
+/* the table containing all the interface */
+.table_interface_container{
+	background-color:#eeeeee;
+	width:100%;
+	border:0px;
+	padding:0px;
+	
+}
+/* the table containing all the interface, login page */
+.table_interface_container_login{
+	background-color:#eeeeee;
+	border:0px;
+	padding:0px;
+	
+}
+/* the logo row of the container table */
+.table_interface_container_tr_logo{
+	background-color: #a9b299;
+	width:100%;
+	padding:0px;
+	
+}
+/* the menu (home, insert, search,...) row of the container table, see table_interface_container_table_menu for additional settings */
+.table_interface_container_tr_menu{
+	background-color: #d5c287;	
+}
+/* the menu (home, insert, search,...) subtable of the container table */
+.table_interface_container_table_menu{
+	background-color: #d5c287;
+	width:100%;
+	padding:4;
+	
+}
+/* the menu (home, insert, search,...) row of the container table, see table_interface_container_table_menu_admin for additional settings */
+.table_interface_container_tr_menu_admin_area{
+	background-color: #ff7700;	
+}
+/* the menu (home, insert, search,...) subtable of the container table */
+.table_interface_container_table_menu_admin_area{
+	background-color: #ff7700;
+	width:100%;
+	padding:4;
+	
+}
+
+/* the popup div that shows the help in the interface configurator */
+#div_help
+{
+    position: absolute;
+    display: none;
+    width: 400px;
+    border: 2px solid #ff7700;
+}
+
+#div_help_content
+{
+    background-color: White;
+    height: 200px;
+    padding: 8px;
+    overflow: scroll;
+}
+
+#div_help_content_title
+{
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+
+
+
+
+

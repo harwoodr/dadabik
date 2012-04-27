@@ -1,0 +1,849 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <title>DaDaBIK (DaDaBIK is a DataBase Interfaces Kreator)
+http://www.dadabik.org/ - Documentation</title>
+
+  
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+</head><body>
+<h1>DaDaBIK Documentation</h1>
+
+<a name="general_information"></a>
+<h1>General information</h1>
+
+<p><b>Project name:</b> DaDaBIK (DaDaBIK is a DataBase Interfaces
+Kreator)<br>
+<b>Author:</b> Eugenio Tacchini <span style="text-decoration: underline;"></span>(eugenio at favoriti dot it)<br>
+<b>Web site:</b> <a href="http://www.dadabik.org/">http://www.dadabik.org/</a><br>
+<b>Last release:</b> 4.4 (released April 3, 2012). This
+documentation is about the 4.4 release, if you need the
+documentation for a previous release please read the documentation file
+included in each downloaded package.<br>
+<b>License:</b> DaDaBIK is released under the GPL license.</p>
+
+<h1><a name="table_of_contents"></a>Table of contents<br>
+</h1>
+
+<p><a href="#what_is_dadabik">What is DaDaBIK?</a><br>
+<a href="#requirements">Requirements</a><br>
+<a href="#installation">Installation</a><br>
+<a href="#upgrade">Upgrade from previous versions</a><br>
+<a href="#configuration">Configuration</a><br>
+<a href="#authentication">Authentication</a><br>
+<a href="#instances">Multiple function views: creating two instances of
+DaDaBIK</a><br>
+<a href="#security">Security</a><br>
+<a href="#coding_guidelines">Coding guidelines</a><br>
+<a href="#faqs">FAQs</a><br>
+<a href="#bugs">Known bugs and limitations</a><br>
+</p>
+
+<h1><a name="what_is_dadabik">What is DaDaBIK?</a>
+</h1>
+
+
+<hr size="1">DaDaBIK is a very popular and mature Open Source PHP
+application which allows you to easily create a
+highly customizable database front-end/application without coding. You
+can use it to create in a few minutes a very basic CRUD (create, read,
+update, delete) database front-end or to develop a more sophisticated
+database application.
+<p>No programming skills are needed to use it; if however you are a PHP
+programmer with DaDaBIK you can save tens of hours of work.</p>
+
+<p>With DaDaBIK (differently from many competitors) you don't produce a
+PHP script, which would become outdated when you modify the schema of
+your database, but instead you directly use its abstraction layer that
+can be easily updated every time you modify your database's schema.</p>
+
+<p>DaDaBIK uses the <a href="http://adodb.sourceforge.net/">ADOdb</a> and the <a href="http://php.net/manual/en/book.pdo.php">PDO</a> database abstraction libraries in order to support as many DBMSs as
+possible, at the moment it officially suport MySQL, PostgreSQL and SQLite.</p>
+
+<p> The strength of DaDaBIK lies in its ability to be customized. For
+example for each table field you can choose: </p>
+
+<ul>
+
+  <li>if the field must be included or not in a search/insert/update
+form and results table</li>
+  <li>its label</li>
+  <li>its content format (e.g. numeric, alphabetic, e-mail,
+url...) </li>
+  <li>the HTML input type (e.g. textbox, menu, date, rich text editor,
+password box...) </li>
+  <li>the possible values, also driven from another table (foreign key
+support)</li>
+  <li>and more... </li>
+</ul>
+
+<p>Other features include file uploading, master/details view, export
+to CSV, checking
+for possible duplication during an insert, authentication and
+authorization restrictions on view/update/delete, e-mail notices.</p>
+
+<p>The graphic layout of DaDaBIK is customizable to help you to embed
+it in your own site.</p>
+
+<p>DaDaBIK differs from PHPMyAdmin: it has not been created to offer
+the complete administration of a database, but rather to allow the
+creation of a customizable and user friendly database application. The
+target of a DaDaBIK application can be the final user instead of a DB
+administrator.<br>
+<br>
+DaDaBIK is available in Italian, English, Dutch, German, Spanish,
+French, Portuguese, Croatian, Polish, Catalan, Estonian, Rumanian,
+Hungarian, Swedish, Slovak, Russian and Finnish.<br>
+<br>
+Since its first release in 2001 it has been downloaded more than
+150.000 times and its users community has produced about 10.000 posts
+in the forums.
+<table>
+  <tbody>
+    <tr>
+      <td> <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FDaDaBIK%2F154757317877584&amp;width=292&amp;connections=0&amp;stream=false&amp;header=false&amp;height=62" style="border: medium none ; overflow: hidden; width: 292px; height: 62px;" allowtransparency="true" frameborder="0" scrolling="no"></iframe><br>
+      </td>
+      <td>Follow DaDaBIK on <a href="http://twitter.com/DaDaBIK">Twitter</a>!
+      </td>
+    </tr>
+  </tbody>
+</table>
+<a href="#general_information">[back to top]</a></p>
+
+<h1><a name="requirements"></a>Requirements</h1>
+
+<hr size="1">
+<ul>
+
+  <li> PHP</li>
+  <ul>
+    <li>version &gt;= 4.3 ( &gt;= 5.1 if you want to use it with SQLite)</li>
+    <li>PHP upload enabled if &nbsp;you want to use the upload feature
+(see PHP manual for php.ini and file permissions settings)<br>
+    </li>
+  </ul>
+  <li>MySQL</li>
+  <ul>
+    <li>version &gt;= 3.23.x (probably also works with previous
+releases)<br>
+    </li>
+  </ul>
+  <li>PostgreSQL</li>
+  <ul>
+    <li>Tested with 8.x and 9.x versions, probably works with 7.x version too.<br>
+    </li>
+  </ul>
+  <li>SQLite</li>
+  <ul>
+    <li>version  &gt;= 3 (it could work with version 2 too, not tested)
+    </li>
+  </ul>
+  <li>A pre-existent database with AT LEAST ONE table to manage,
+with DaDaBIK you can't create databases and tables,</li>
+</ul>
+<a href="#general_information">[back to top]</a>
+<h1><a name="installation"></a>Installation</h1>
+
+<hr size="1">
+<ol>
+
+  <li>Copy everything which is contained in the directory <i>program_files</i>
+in a directory under your Web server </li>
+  <li>Open the file <b>/include/config.php</b> with a text editor and
+edit it (specify at least $dbms_type, $host, $db_name, $user, $pass,
+$site_url, $site_path, $timezone)</li>
+  <li>Run the file<b> http://your_host/your_dir/install.php</b> to
+install DaDaBIK</li>
+  <li> Open the file <b>http://your_host/your_dir/index.php</b> in
+your
+browser and have fun!! You can now start using DaDaBIK.<br>
+    <br>
+You can now insert, search, update, delete the records of the tables
+contained in the database $db_name. You can also manage the views contained in the database. <b><font color="#ff0000">You
+should have set a primary key for each table managed with DaDaBIK if
+you want to delete and update records, otherwise
+DaDaBIK won't show you the corresponding buttons.</font></b><br>
+Also the "search similar record" feature during the insert needs a
+primary key.<br>
+The "insert e-mail notice" feature needs a primary key auto increment
+field to work.</li>
+</ol>
+
+<p> Please leave the link<br>
+Powered by: <a href="http://www.dadabik.org/">DaDaBIK</a> database
+front-end<br>
+somewhere if you use DaDaBIK; it isn't compulsory but I would really
+appreciate it.</p>
+<p><a href="#general_information">[back to top]</a> </p>
+
+<h1><a name="upgrade"></a>Upgrade from previous versions</h1>
+
+<hr size="1">
+
+<p>If you want to upgrade from <i>4.4 beta</i> to <i>4.4</i>
+without loosing your configuration you don't need to re-install
+DaDaBIK:
+</p>
+
+<ul>
+
+  <li>Replace all the old files with the new ones (keep your upload
+folder if you want to save the uploaded files )</li>
+  <li>Update your <b>/include/config.php</b> file using your old
+configuration settings</li>
+  <li>Run the file<b> http://your_host/your_dir/upgrade_4.4.php</b> included in the 4.4 release to upgrade DaDaBIK from 4.4 beta to 4.4</li>
+</ul>
+
+If you want to upgrade to 4.4 from a release older than 4.4 beta you should first upgrade to 4.4 beta, read the related documentation to know how to do it.<br>
+<br>
+<a href="#general_information">[back to top]</a><br>
+
+<h1><a name="configuration"></a>Configuration</h1>
+
+<hr size="1"><b>Introduction</b>
+<br>
+
+The configuration of DaDaBIK can be managed at two different levels:
+<ol>
+
+  <li>Some general configuration parameters can be set from the file <b>/include/config.php</b>,
+just by opening it with a plain text editor and editing it. The file is
+self-explanatory. At this level you can, for example, set the database
+you want to manage with DaDaBIK, or enable/disable some DaDaBIK features<br>
+  </li>
+  <li>For a more analytic tuning you are supposed to use the
+administration section <b>http://your_host/your_dir/admin.php</b>. At
+this level you can choose the table you want to include/exclude and,
+for each table, create your own DaDaBIK interface, choosing for example
+the field you want to include/exclude from the forms, the content of
+each field, the labels....<br>
+Also the administration section is self-explanatory, so in the
+following paragraph we will explain in detail only the <i>interface
+configurator</i>, which is the core of the DaDaBIK configuration; you
+can reach it from the home page of the administration section. </li>
+</ol>
+
+<p>The graphic customization can be done by changing the files <b>/include/header.php</b>
+and <b>/include/footer.php</b> and by using the CSS files <b>/css/styles_screen.css</b>
+and <b>/css/styles_print.css</b>, the former is the main one, the
+latter is used only when you print a page produced by DaDaBIK.<br>
+From the files under <b>/include/languages</b> you can customize all
+the sentences DaDaBIK uses.
+</p>
+
+<p><b>Interface configurator</b>
+<br>
+Here is the meaning of all the parameters you can set for each table
+field:
+</p>
+
+<ul>
+
+  <li><b>Label:</b> the text that DaDaBIK will display in the interface
+as label of the field</li>
+  <li><b>Field type</b>, select among:
+    <ul>
+      <li><b>text:</b> a text box</li>
+      <li><b>textarea:</b> a textarea box</li>
+      <li><b>rich_editor:</b> a rich text editor that allows to easily
+insert/modify HTML content. <font color="#ff0000"><b>This could lead
+to the same security problems that can affect the html content type</b></font>,
+see later for details.</li>
+      <li><b>password:</b> a password text box</li>
+      <li><b>insert_date:</b> the current date will be automatically
+inserted into this field when you insert a new record in your table;
+an insert_date field must be excluded from the insert/update form,
+see below (Field present in the insert/update form?). Note that the
+corresponding database field type must be date</li>
+      <li><b>update_date:</b>
+the current date will be automatically
+inserted into this field when you update a record in your table; an
+update_date field must be excluded from the insert/update form, see
+below (Field present in the insert/update form?). Note that the
+corresponding database field type must be date</li>
+      <li><b>date:</b> three menu: day, month, year. Note that the
+corresponding database field type must be date</li>
+      <li><b>select_single:</b> a customizable menu, see below the
+parameters Option to include, Primary key field, Primary key table,
+Linked fields to specify the menu items</li>
+      <li><b>generic_file:</b> an input field which allows the user to
+browse in his file system and upload a file. You need to specify the
+allowed file extensions in config.php. Note that the corresponding
+database field type must be varchar.</li>
+      <li><b>image_file:</b> the same as the above, but in this case
+DaDaBIK supposes that the file is an image and shows it when the record
+is displayed. You need to specify the allowed file extensions in
+config.php. Note that the corresponding database field type must be
+varchar</li>
+      <li><b>ID_user:</b> the username of the current user will be
+automatically inserted into this field when you insert a new record;
+an ID_user field must be excluded from the insert/update form, see
+below (Field present in the insert/update form?). Note that the
+corresponding database field type must be varchar.</li>
+      <li><b>unique_ID:</b>
+a unique ID generated by using the PHP
+function unique_ID() in conjunction with microtime(), getmypid() and
+md5() will be automatically inserted in this field when you insert a
+new record into your table; a unique_ID field must be excluded from the
+insert/update form, see below (Field present in the insert/update
+form?). Problably you will never use this field type, it can be useful
+just in very special cases.</li>
+    </ul>
+  </li>
+  <li><b>Content type:</b> the content typep determines the check
+procedure DaDaBIK will use during an insert/update and how a field
+value is displayed; select among:
+    <ul>
+      <li><b>alphabetic:</b> only alphabetic characters allowed</li>
+      <li><b>alphanumeric:</b> all characters allowed</li>
+      <li><b>numeric:</b> only numeric characters allowed</li>
+      <li><b>url:</b> only URL with a correct syntax allowed, support
+from http/https/ftp protocols and port numbers; field displayed as a
+URL link</li>
+    <li><b>timestamp:</b> only integers allowed; field displayed as date and time according to the <i>date_format</i> parameter in config.php
+      <li><b>email:</b> only e-mail</li>
+      <li><b>html:</b> all characters allowed; DaDaBIK doesn't perform
+a conversion from special characters to HTML entities with
+htmlspecialchars for the fields having this content type. For example,
+this content type can be used to enter a full custom URL in the
+standard HTML format or an HTML formatted text. <font color="#ff0000"><b>WARNING:
+This can lead to
+security risks</b></font>; DaDaBIK uses the popular <a href="http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed">htmLawed</a>
+library to prevent displaying of dangerous HTML/Javascript code but, as
+the authors state, (<a href="http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/htmLawed_README.htm#s2.8">http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/htmLawed_README.htm#s2.8</a>),
+there are some minor cases in which htmLawed can fail. If a malicious
+user insert some arbitrary javascript code and the library fails in
+recognizing it, the code can be then executed by other users just by
+using the application. Among other problems, this can lead to XSS
+attack (<a href="http://en.wikipedia.org/wiki/Cross-site_scripting">http://en.wikipedia.org/wiki/Cross-site_scripting</a>),
+which in turn can allow an unauthorized access to the application (<a href="http://en.wikipedia.org/wiki/Session_hijacking">http://en.wikipedia.org/wiki/Session_hijacking</a>)
+and, if the Internet browser of the user contains security holes, even
+the execution of arbitrary code in the client machine. Use at your own
+risk.</li>
+      <li><b>phone:</b> only phone numbers with a correct syntax (a +
+sign followed by numbers e.g. +39025689781) allowed</li>
+    </ul>
+  </li>
+  <li>The following parameters are used to <b>choose if a field must
+be displayed</b> and used in the various sections of DaDaBIK: Field
+present in the search form?/Field present in the results page?/Field
+present in the details page?/Field present in the insert/update form?
+For the last one (insert/update form), if the field is auto-increment
+you should choose N.<br>
+  </li>
+  <li> <b>Is the field a required one?</b> Choose if the field should
+be required during insert and update procedures</li>
+  <li> <b>Check for duplicated entries during insert?</b> Choose if
+the field value should be checked for possible duplication during the
+insert procedure</li>
+  <li><b>Other choices allowed?</b> Choose if the field, a
+select_single one, can accept also values other than the pre-set
+options during an insert/update.<br>
+If the user add a different value, it will be included in the list of
+pre-set options. Note that, if the field is a foreign key (see Primary
+key field for a definition), the <i>other</i> value is used to insert
+a new record in the primary key table.<br>
+The use of this option together with a foreign key field makes sense
+only if there is just one linked field and requires that <i>Primary
+key table</i> has a primary key <b>auto-increment</b> field.</li>
+  <li><b>Option to include:</b> specify the possible options of a
+select_single field e.g. ~~teacher~manager~student~, in this example
+the first option is blank.</li>
+  <li><b>Primary key field:</b> if a field is a select_single and the
+options must be driven from another table (so the field can be
+considered foreign key for DaDaBIK, regardless of a real dbms foreign
+key declaration), specify here the primary key of that table.</li>
+  <li><b>Primary key table:</b> if a field is a select_single and the
+options must be driven from another table, specify here the name of
+that table.</li>
+  <li><b>Linked fields: </b>the fields in the primary key table you
+want to display. Imagine you have a table <i>albums_tab</i> that
+contains information about CDs. In this table you have a field <i>ID_author</i>
+that "links" the table <i>authors_tab</i>. If you want to display, for
+each record, <i>first_name_author</i> and <i>last_name_author</i> of <i>authors_tab</i>,
+you have to use <i>ID_author</i> as primary key field, <i>authors_tab</i>
+as primary key table,<span style="font-style: italic;"> </span><i>first_name_author</i>~<i>last_name_author</i>
+as linked fields</li>
+  <li><b>Order by:</b> the linked field by which you want to order the
+items in the menu created by a select_single field</li>
+  <li><b>Order type:</b> the order type (ASC or DESC, if you leave
+blank ASC is the default) to be used on the "Order by" field</li>
+  <li><b>Search operator: </b>specify is_equal, contains, starts_with,
+ends_with, greater_than, less_than or a group of this operator
+separated by "/". E.g. if you specify just "contains" DaDaBIK will use
+always the contains operator for this field during the search; if you
+use "exactly/contains" DaDaBIK will create for this field a listbox
+with the operators exactly/like, the user can then choose the preferred
+one during each search operation</li>
+  <li><b>Prefix: </b>for text, textarea and rich_editor fields you can
+choose a prefix default value for your field, e.g. "http://" if your
+field need to be filled with a Web url; the prefix will be displayed
+directly in the insert form, but if the user doesn't fill-in the field
+it will be considered as blank</li>
+  <li><b>Default value:</b> for text, textarea and rich_editor fields
+you can choose a default value for your field, the value will be
+displayed directly in the insert form</li>
+  <li><b>Width:</b> the width of an input box, used with text,
+password, textarea and rich_editor boxes</li>
+  <li><b>Height:</b> the height of an input box, used with textarea and
+rich_editor boxes</li>
+  <li><b>Maxlength:</b> the maximum number of characters allowed in the
+input box, used with text, password, textarea, rich_editor boxes and
+select_single (just for the "other" option)</li>
+  <li><b>Hint:</b> the text of a hint for the user that will appear
+during the insert/update procedure near the input field</li>
+  <li><b>Linked items table names:</b> you should fill this property
+only for the primary key of a table, when you want to enable a
+master/details view.<br>
+For example imagine you have an albums (id_album, title_album) table
+and a songs (id_song, id_album, title_song) table; if you want to
+display, in the album detail view, also the list of the linked songs,
+you have to put <i>songs</i> in <i>Linked items table names</i> and <i>id_album</i>
+in <i>Items table foreign key field names</i> (see below). Each table
+can have more than one linked table; in this case you can add
+additional table and foreign key field names using the separator</li>
+  <li><b>Items table foreign key
+field names:</b> you should fill this property only for the primary key
+of a table, when you want to enable a master/details view.<br>
+For example imagine you have an albums (id_album, title_album) table
+and a songs (id_song, id_album, title_song) table; if you want to
+display, in the album detail view, also the list of the linked songs,
+you have to put <i>songs</i> in <i>Linked items table names</i> (see
+above) and <i>id_album </i>in <i>Items table foreign key field names</i>. It is also important to highlight that, in this example, <i>id_album</i> in <i>songs</i> should be a select_single field with values driven from albums (see field type for information about select_single fields)
+Each table can have more than one linked table; in this case you can
+add additional table and foreign key field names using the separator</li>
+  <li><b>Separator:</b> This is the separator characther used here to
+separate values in the <i>Option to include</i>, <i>Linked fields</i>,
+    <i>Linked items table names</i> and <i>Items table foreign key
+field names</i> parameters. In most of the case you can safely leave
+(and use) the default one, ~</li>
+</ul>
+<a href="#general_information">[back to top]</a>
+<h1><a name="authentication"></a>Authentication</h1>
+
+<hr size="1">
+<p>An authorization model is available to prevent unauthorized accesses
+and to allow users to:
+</p>
+
+<ul>
+
+  <li>Delete only their own records </li>
+  <li>Modify only their own records </li>
+  <li>View only their own records </li>
+</ul>
+
+The owner of a record is the user who entered it.<br>
+
+<br>
+
+To enable authentication, each table you want to protect must have a
+field whose field type is set to <i>ID_user</i>; you also have to set
+$enable_authentication = 1 in <b>/include/config.php</b>. By setting
+the parameters $enable_delete_authorization, $enable update
+authorization and $enable_browse_authorization you can then customize
+your authorization model.<br>
+
+<br>
+
+There are two types of users: normal users and administrator users.
+Administrator users can view and manage users list by using DaDaBIK
+itself.<br>
+
+<br>
+
+DaDaBIK is released with the following default administrator user:
+<ul>
+
+  <li>username: <i>root</i> </li>
+  <li>password: <i>letizia</i> </li>
+</ul>
+
+It is strongly recommended to change the default root password for
+security reasons.<br>
+
+DaDaBIK uses by default the table users_tab to store user information,
+but you can also use your own users table, changing the $users_table_*
+parameters in <b>/include/config.php</b>.
+User passwords need to be md5 encrypted before being
+registered/updated, so before inserting a new user or changing the
+password for an existing one it is necessary to create the encrypted
+password by following the "md5 crypter" link in the users form. <br>
+<br>
+<a href="#general_information">[back to top]</a><br>
+
+<br>
+
+<h1><a name="instances"></a>Multiple function views: creating two
+instances of DaDaBIK</h1>
+
+<hr size="1">
+<p>Sometimes it is necessary to have one view for users where they can
+only
+view the data and a second view for the database administrators to
+manage
+the data being displayed. This will help you set up two instances of
+DaDaBIK to look at the same database.
+</p>
+
+<ol type="1">
+
+  <li>Install your first instance of DaDaBIK using the default DaDaBIK
+table
+prefixes contained in the <b>/include/config.php</b> file (last two
+variables in the
+file).<br>
+    <b>http://your_host/your_dir/install.php</b>
+    <p>If you want things to look the same in both installations like
+headers,
+footers, logos, etc., you can make those changes now so that you only
+have
+to make them once; otherwise you can worry about prettying it up later.
+    </p>
+  </li>
+  <li>Copy your entire DaDaBIK folder into a new folder you wish to use
+for
+the second instance: <b>http://your_host/your_dir/</b> &lt;-- all
+contents copied to: <b>http://your_host/your_dir/admin-dir-name/</b> </li>
+  <li>Open <b>/include/config.php</b> from the <b>/your_dir/admin-dir-name/include/</b>
+folder and
+change the table prefix and table list name in this file to something
+like:<br>
+dadabik<b>_admin</b>_<br>
+and<br>
+dadabik<b>_admin</b>_table_list
+    <p>It does not matter what your prefixes are -- just so long as
+they are
+different from the first install prefixes. </p>
+    <p>Also in <b>/include/config.php</b>, change the $site_url to the
+correct URL for the admin area so the correct installation is used. </p>
+  </li>
+  <li>Now, install your second instance of DaDaBIK:<br>
+http://your_host/your_dir/admin-dir-name/install.php </li>
+  <li>This will create additional tables with your admin prefix for all
+your
+original DaDaBIK tables also. You should remove them by going to the
+admin
+interface for the second instance you just installed and uninstall
+those
+tables.
+    <p>For this example, we'll assume you used the following:<br>
+1st install: "dadabik_" table prefix with
+"dadabik_table_list" table list name<br>
+2nd install: "dadabik_admin_" table prefix with
+"dadabik_admin_table_list" table list name </p>
+    <p>In the admin for the 2nd install (<b>http://your_host/your_dir/admin-dir-name/admin.php</b>),
+"uninstall" each table you see beginning with
+"dadabik_". </p>
+  </li>
+  <li>Now you can manage both instances independent from each other
+through:<br>
+    <b>http://your_host/your_dir/admin.php</b><br>
+and<br>
+    <b>http://your_host/your_dir/admin-dir-name/admin.php</b>
+    <p>Once you have two (or more) instances created, you can apply
+security to
+each one separately. Refer to the Authentication and Security sections
+for more information.</p></li>
+</ol>
+<a href="#general_information">[back to top]</a>
+<h1><a name="security"></a>Security</h1>
+
+<hr size="1">
+<p>After the program is installed it is a good practice to remove the
+file
+install.php and all the upgrade*.php files since they could be used by
+malicious users in order to change or even re-install your DaDaBIK
+installation.<br>
+<br>
+The files admin.php and internal_table_manager.php could also be used
+to modify your installation. If you enable the
+authentication within DaDaBIK, access to the files will be protected,
+otherwise other methods of protecting these files may be required.</p>
+
+<p>Read carefully this documentation file (see above, configuration
+section) before using the HTML content type and the rich_editor field
+type, which can lead to high
+secrutity risks</p>
+<p><a href="#general_information">[back to top]</a></p>
+
+<h1><a name="coding_guidelines"></a>Coding guidelines</h1>
+
+<hr size="1">
+<p>If you want to contribute to the DaDaBIK code you have to follow
+some
+coding guidelines; this document: <a href="http://www.evolt.org/article/PHP_coding_guidelines/18/60247/">http://www.evolt.org/article/PHP_coding_guidelines/18/60247/</a>
+fits most of DaDaBIK coding style rules, in particular follow the
+sections:<br>
+</p>
+
+<ul>
+
+  <li>Tabs v. spaces</li>
+  <li>Variable names</li>
+  <li>Loop indices</li>
+  <li>Function names</li>
+  <li>Function arguments</li>
+  <li>Including braces</li>
+  <li>SQL code layout</li>
+  <li>Quoting strings</li>
+  <li>Shortcut operators</li>
+  <li>Turn on all error reporting</li>
+</ul>
+
+In addition and/or modification to the above document sections, here
+are other rules: <br>
+
+<ul>
+
+  <li>The first&nbsp; brace must be put on the&nbsp;first
+line of the block.<br>
+Examples:<br>
+if (isset($username_user)){ is ok<br>
+if (isset($username_user))<br>
+{ is wrong</li>
+  <li>if, else, while , for....closing brace must be followed by
+a // end if, // end else, // end while, // end for.....comment.<br>
+Examples:<br>
+if (isset($username_user)){<br>
+&nbsp; &nbsp; echo 'Username set';<br>
+} // end if<br>
+else {<br>
+&nbsp; &nbsp; echo 'Username not set';<br>
+} // end else</li>
+  <li>Array name must be plural and terminate with the _ar suffix.<br>
+Examples:<br>
+$users_ar is ok<br>
+$user, $users, $user_ar are wrong</li>
+  <li>Global variables must not be used, functions must receive
+as parameters all the variables they need. Exceptions are made for:
+$conn, $quote, $current_user, $current_user_is_administrator,
+$submit_buttons_ar, $normal_messages_ar and all configuration variables
+(the ones set in /include/config.php)</li>
+  <li>$_GET variables are not used directly; corresponding
+variables are set in index.php.<br>
+Examples:<br>
+if (isset($_GET["page"])){<br>
+&nbsp; &nbsp; $page = $_GET["page"];<br>
+} // end if<br>
+After the above setting, the $page variable is used in the code.</li>
+</ul>
+
+Other coding rules should be learned looking for the DaDaBIK code.
+Please contact me if you have any doubts.<br>
+<br>
+<a href="#general_information">[back to top]</a><br>
+
+<br>
+
+<h1><a name="faqs"></a>FAQs</h1>
+
+<hr size="1">
+<p><b>I am looking for an old version of DaDaBIK, can anybody help me
+with a link to DaDaBIK x.x ??</b><br>
+<br>
+Old releases of DaDaBik can be found at&nbsp;<a href="http://sourceforge.net/project/showfiles.php?group_id=39649">sourceforge</a>.</p>
+
+<p>but you are strongly encouraged not to use old releases, which can
+have security problems<b><br>
+</b></p>
+
+<p><b>I get:<br>
+"[06] Error: during database connection.<br>
+MySQL server said: Client does not support authentication protocol
+requested by server; consider upgrading MySQL client".<br>
+Why?</b><br>
+<br>
+It is due to the authentication protocol introduced with MySQL
+4.1.x; here:<br>
+<a href="http://dev.mysql.com/doc/mysql/en/old-client.html">http://dev.mysql.com/doc/mysql/en/old-client.html</a>
+you can find several solutions.</p>
+
+<p><b>I get [08] Error Message<br>
+I get "Error during query execution" </b><br>
+<br>
+Please open the file <b>include/config.php, </b>look for the variable
+named <b>$debug_mode. </b>Set it to 1, so that you'll be able to see
+what the error is. If you still cannot figure it out&nbsp;post the
+error message in the support forum.</p>
+
+<p><b>I can't see the edit/delete record icons in the results view </b><br>
+<br>
+You did not set a primary key in the table, so you are able to see the
+records but DaDaBIK cannot edit/delete them.</p>
+
+<p><b>I get "your database is empty" error, why? </b><br>
+<br>
+You first have to set up a database and then you can install DaDaBIK.</p>
+
+<p><b>Are multiple primary keys supported? </b><br>
+<br>
+Not yet. Not planned. If you're interested in developing it please
+contact me (eugenio at favoriti dot it).</p>
+
+<p><b>Page not showing after Insert/Update.</b><br>
+<br>
+Open <b>include/config.php </b>and make sure&nbsp;the variable
+$site_url is set to the the complete path to your DaDaBIK installation.<br>
+(E.g <a href="http://www.yoursite.com/dadabik_folder/">http://www.yoursite.com/dadabik_folder/</a>)</p>
+
+<p><b>How to change graphic layout etc? </b><br>
+<br>
+The role of the files is self-explicatory<br>
+include/header.php<br>
+include/footer.php<br>
+<br>
+This takes care of the general styles<br>
+css/style.css<br>
+<br>
+These two functions take care of forms and results table styles<br>
+change build_form() and build_results_table()</p>
+
+<a href="#general_information">[back to top]</a>
+<h1><a name="bugs"></a>Known bugs, limitations and unexpected behaviors</h1>
+
+<hr size="1">
+<ul>
+
+  <li>Security/data-integrity related:</li>
+  <ul>
+    <li>Malicious users could use PHP scripts for setting session
+variables to particular values in order to bypass the login procedure
+and get unauthorized access to DaDaBIK. These scripts must be hosted on
+the same domain where the DaDaBIK target installation is hosted. </li>
+  </ul>
+  <ul>
+    <li>Malicious users can exploit a field with content type set to
+HTML
+or field type set to rich_edit to insert arbitrary javascript code,
+this can lead to security risks if the htmLawed library doesn't filter
+this content properly (see above, configuration section, for all the
+details).</li>
+  </ul>
+  <ul>
+    <li>DaDaBIK doesn't provide a locking mechanism during records editing. This could lead to unexpected results in some situations: for example imagine user A and user B opening in edit mode the same record about a product. Both the users modify the price, user A from 50 euros to 60 euros, user B from 50 euros to 70 euros. Imagine that user B clicks on the save button a few seconds after user A. Both the users would think to have correctly modify the price, but user A is wrong, the current price is now 70 euros. Another example: user A modify the price, user B the description; in this case user B overrides the price modifications made by user A, the price is therefore restored to its initial value.</li>
+  </ul>
+  <ul>
+    <li>Searching values containing % or _ using the "contains", "starts with" or "ends with" conditions could lead to wrong search results.</li>
+  </ul>
+  
+  
+  
+  <li>Table and field names related:<br>
+  </li>
+  <ul>
+    <li>Insert/search/update fail if one or more field names contain
+blank spaces or dots (e.g. "my field" or "my.field" are not allowed,
+use "my_field" instead). </li>
+  </ul>
+  <ul>
+    <li>Quote characters, such as ' ` ", could lead to problems if used
+in table and field names.</li>
+    <li>Using field names containing the value set for $alias_prefix,
+$null_checkbox_prefix, $select_type_select_suffix, $year_field_suffix,
+$month_field_suffix, $day_field_suffix could lead to unexpected
+results; you can change the value of the above variables editing
+/include/config.php</li>
+  </ul>
+  <li>User interface related:<br>
+  </li>
+  <ul>
+    <li>Some language translations are not completed.</li>
+    <li>A few sentences are not translated in all the languages available.</li>
+    <li>A few sentences are not translated in all the languages available.</li>
+    <li>For some languages, some characters could be incorrectly displayed.</li>
+    <li>The rich editor interface (TinyMCE) is displayed in english
+only. </li>
+  </ul>
+  <li>PosgreSQL and Oracle related:<br>
+  </li>
+  <ul>
+    <li>DaDaBIK needs table names in lower case to work on PostgreSQL. </li>
+  </ul>
+  <ul>
+    <li>DaDaBIK doesn't work correctly on Oracle if table and/or field
+names are in mixed case. </li>
+  </ul>
+  <ul>
+    <li>The insert e-mail notice doesn't work on PostgreSQL and Oracle.</li>
+    <li>Insert/update don't work correctly on PostgreSQL and Oracle if
+the user choose "Other...." from a select_single field menu and the
+field has some linked fields.</li>
+  </ul>
+  <li>Admin section related:<br>
+  </li>
+  <ul>
+    <li>The field renaming feature of the administration page doesn't
+work as expected if the renamed field is used in one of the following
+properties: "Primary key field", "Linked fields", "Order by" in the
+interface configurator related to any of the tables. In particular,
+after the renaming, you will get "[08] Error: during query execution"
+messages from the DaDaBIK front end; you should edit the above
+properties by hand, renaming the field in the interface configurator. </li>
+  </ul>
+  <ul>
+    <li>The "refresh installation" admin operation doesn't work
+correctly
+and could lead to an interface configurator settings loss if the
+installation is the result of an upgrade from a DaDaBIK version &lt;
+4.1 rc2; the "refresh installation" bug is considered fixed only for
+tables installed (DaDaBIK installation from scratch or single table
+installation from the admin interface) using a DaDaBIK version &gt;=
+4.1 rc2.</li>
+  </ul>
+  <li>Master/details related:<br>
+  </li>
+  <ul>
+    <li>In a master/details view, the details table is correctly showed
+below the corresponding master table record when the edit function is
+used, but it is not showed when the details function is used</li>
+    <li>After having accessed (in edit mode) a record with
+master/details view, DaDaBIK will show only the records related to that
+master record if the details table is accessed in "last search results"
+mode. A "show all" is needed to remove the incorrect filter.<br>
+    </li>
+  </ul>
+
+  <li>Others:</li><ul>
+    <li>The "previous" and "next" buttons don't work correctly after
+this
+sequence of operations:
+- perform a search based on a field A
+- change the value the field A for a record of the resultset </li>
+  </ul>
+  <ul>
+    <li>If, for a date field, the value of the month is set to other than [1-12] OR the value of the day is set to other than [1-31] OR the value of the year is set to other than [$start_year-$end_year] (see config.php) DaDaBIK will display in the edit view, for the relative field, the first default value available in the listbox. For example if a date field is 1940-00-00 DaDaBIK will display, in its default configuration, 1968-01-01 and will update the date to 1968-01-01 if the record is saved.</li>
+  </ul>
+  <ul>
+    
+    <li>Primary keys composed by multiple columns are not handled. </li>
+    <li>The "check for duplicated" doesn't work with file types:
+DaDaBIK
+doesn't warn about similarity when two files have a similar name;
+furthermore, the "check for duplicated" feature causes uploads to fail
+during insert, in particular the files are not uploaded if some
+possible duplicated records are found and the user decides to insert it
+anyway. </li>
+    <li>HTML content is not set correctly as "Default value" (interface
+configurator). </li>
+    <li>When
+a new option of a select_single field with linked fields
+is
+inserted through the "other..." option, the current user is not
+inserted in the ID_user field of the
+linked table. This means that the new record in the linked table won't
+get an owner and the&nbsp; $enable_delete_authorization,
+$enable_update_authorization and $enable_browse_authorization options
+won't work as expected.<br>
+</li>
+  </ul>
+  <li>Unexpected behaviors (not really DaDaBIK bugs but behaviors which the average user doesn't expect)</li><ul>
+  	<li>DaDaBIK relies on the system's (server) timezone settings (or on the $timezone parameter with PHP version >= 5.1) for
+date functions (e.g. to produce the current date), which can be different
+from the client's one.</li>
+    <li>The value actually inserted in the database during an insert/update, if the value typed in the form is not part of the domain specified during table creation (e.g. integer, varchar,...), depends on the DBMS settings and on the domain itself. For example if an integer field is left blank during insert/update (not NULL, blank), MySQL could insert 0 as value, because an empty string is not part of the integer domain and very often the default value for integers is set to 0.</li>
+  </ul>
+</ul>
+<a href="#general_information">[back to top]</a>
+</body></html>
