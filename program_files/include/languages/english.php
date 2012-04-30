@@ -214,10 +214,10 @@ $login_messages_ar = array(
 	"pwd_gen_link" => "create password",
 	"incorrect_login" => "Username or password incorrect",
 	"pwd_explain_text" =>"Insert a word to be used as password and press <b>Crypt it!</b>.",
-	"pwd_explain_text_2" =>"Press <b>Register</b> to write it in the below form",
-	"pwd_suggest_email_sending"=>"You may want to send yourself a mail to remeber the password",
+	"pwd_explain_text_2" =>"Press <b>Register</b> to copy it into the form below",
+	"pwd_suggest_email_sending"=>"You may want to send yourself a mail to remember the password",
 	"pwd_send_link_text" =>"send mail!",
-	"pwd_encrypt_button_text" => "Cript it!",
+	"pwd_encrypt_button_text" => "Crypt it!",
 	"pwd_register_button_text" => "Register password and exit"
 );
 ?>
